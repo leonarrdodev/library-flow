@@ -1,0 +1,5 @@
+.env
+node_modules
+teste-conexao.js
+pgdata/
+.DS_Store

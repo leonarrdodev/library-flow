@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:alpine
+    container_name: library_db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: ''''''''
+      POSTGRES_PASSWORD: pass2192
+      POSTGRES_DB: library_flow
+    volumes:
+      # quando o container subir ele criara as tabelas automaticamente 
+      - ./database:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
