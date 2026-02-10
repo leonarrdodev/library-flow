@@ -56,12 +56,12 @@ class AuthorController {
             const authorDelete = await AuthorRepository.delete(id)
 
             if(!authorDelete){
-                res.status(404).json({err: 'Autor não existe'})
+                res.status(404).json({error: 'Autor não existe'})
             }
 
             res.status(204).send()
         } catch(err){
-            res.status(500).json({err: 'Erro ao deletar autor', details: err.message})
+            res.status(500).json({error: 'Erro ao deletar autor', details: err.message})
         }
     }
 }
