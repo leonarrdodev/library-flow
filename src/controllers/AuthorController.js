@@ -39,7 +39,7 @@ class AuthorController {
         try{
              const author = await AuthorRepository.update(id, nome, nacionalidade)
              if(author === null || author === undefined){
-                res.status(404).json({error: 'Autor não encontrado'})
+                return res.status(404).json({error: 'Autor não encontrado'})
              }
 
              res.status(200).json({author})
@@ -56,7 +56,7 @@ class AuthorController {
             const authorDelete = await AuthorRepository.delete(id)
 
             if(!authorDelete){
-                res.status(404).json({error: 'Autor não existe'})
+                return res.status(404).json({error: 'Autor não existe'})
             }
 
             res.status(204).send()
