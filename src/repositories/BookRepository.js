@@ -26,6 +26,19 @@ class BookRepository {
         return result.rows
     }
 
+    //buscar livro pelo id
+    async findById(id){
+        const query = `
+            SELECT livros.*, autores.nome AS nome_autor
+            FROM livros 
+            INNER JOIN autores ON livros.autor_id = autores.id
+            WHERE livros.id = $1
+        `
+        const value = [id]
+        const result = await db.query(query, value)
+        return result.rows[0]
+    }
+
     //atualizar livro
     async update(id, titulo, autor_id, quantidade_disponivel){
         const query = `
@@ -50,6 +63,19 @@ class BookRepository {
 
         const value = [id]
         const result = await db.query(query, value)
+        return result.rows[0]
+    }
+
+    //atualizar estoque
+    async updateStock(livro_id, nova_quantidade){
+        const query = `
+            UPDATE livros
+            SET quantidade_disponivel = $1
+            WHERE id = $2
+        `
+
+        const values = [nova_quantidade, livro_id]
+        const result = await db.query(query, values)
         return result.rows[0]
     }
 }
